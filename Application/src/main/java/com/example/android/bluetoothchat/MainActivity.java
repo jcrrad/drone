@@ -19,6 +19,7 @@ package com.example.android.bluetoothchat;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ViewAnimator;
@@ -39,9 +40,10 @@ import com.example.android.common.logger.MessageOnlyLogFilter;
 public class MainActivity extends SampleActivityBase {
 
     public static final String TAG = "MainActivity";
-
+    BluetoothChatFragment fragment;
     // Whether the Log Fragment is currently shown
     private boolean mLogShown;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +51,8 @@ public class MainActivity extends SampleActivityBase {
         setContentView(R.layout.activity_main);
 
         if (savedInstanceState == null) {
+            fragment = new BluetoothChatFragment();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            BluetoothChatFragment fragment = new BluetoothChatFragment();
             transaction.replace(R.id.sample_content_fragment, fragment);
             transaction.commit();
         }
@@ -71,9 +73,60 @@ public class MainActivity extends SampleActivityBase {
         return super.onPrepareOptionsMenu(menu);
     }
 
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        Log.v("KeyJeff", event.getKeyCode() + "");
+        switch (event.getKeyCode()) {
+            case KeyEvent.KEYCODE_BUTTON_START:
+                fragment.sendMessage("02");
+                break;
+            case KeyEvent.KEYCODE_DPAD_LEFT://turn lef
+                fragment.sendMessage("0a");
+                break;
+            case KeyEvent.KEYCODE_DPAD_RIGHT://turn right
+                fragment.sendMessage("0d");
+                break;
+            case KeyEvent.KEYCODE_DPAD_UP:
+                fragment.sendMessage("0w");
+                break;
+            case KeyEvent.KEYCODE_DPAD_DOWN:
+                fragment.sendMessage("0s");
+                break;
+            case KeyEvent.KEYCODE_BUTTON_B:
+                fragment.sendMessage("0l");
+                break;
+            case KeyEvent.KEYCODE_BUTTON_X:
+                fragment.sendMessage("0j");
+                break;
+            case KeyEvent.KEYCODE_BUTTON_Y:
+                fragment.sendMessage("0i");
+                break;
+            case KeyEvent.KEYCODE_BUTTON_A:
+                fragment.sendMessage("0k");
+                break;
+            case KeyEvent.KEYCODE_BUTTON_R1:
+                //kill throttle
+                fragment.sendMessage("04");
+                break;
+            case KeyEvent.KEYCODE_BUTTON_R2://kill throttle
+                fragment.sendMessage("04");
+                break;
+            case KeyEvent.KEYCODE_BUTTON_L1://kill throttle
+                fragment.sendMessage("04");
+            case KeyEvent.KEYCODE_BUTTON_L2://kill throttle
+                fragment.sendMessage("04");
+                break;
+            default:
+                break;
+        }
+        return true;
+
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
+        switch (item.getItemId()) {
             case R.id.menu_toggle_log:
                 mLogShown = !mLogShown;
                 ViewAnimator output = (ViewAnimator) findViewById(R.id.sample_output);
@@ -88,7 +141,9 @@ public class MainActivity extends SampleActivityBase {
         return super.onOptionsItemSelected(item);
     }
 
-    /** Create a chain of targets that will receive log data */
+    /**
+     * Create a chain of targets that will receive log data
+     */
     @Override
     public void initializeLogging() {
         // Wraps Android's native log framework.
