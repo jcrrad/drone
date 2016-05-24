@@ -33,7 +33,7 @@ import com.example.android.common.logger.MessageOnlyLogFilter;
 /**
  * A simple launcher activity containing a summary sample description, sample log and a custom
  * {@link android.support.v4.app.Fragment} which can display a view.
- * <p>
+ * <p/>
  * For devices with displays with a width of 720dp or greater, the sample log is always visible,
  * on other devices it's visibility is controlled by an item on the Action Bar.
  */
@@ -73,49 +73,49 @@ public class MainActivity extends SampleActivityBase {
         return super.onPrepareOptionsMenu(menu);
     }
 
-
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
         Log.v("KeyJeff", event.getKeyCode() + "");
+        event.getAction()
         switch (event.getKeyCode()) {
             case KeyEvent.KEYCODE_BUTTON_START:
-                fragment.sendMessage("02");
+                fragment.sendMessage("02");//pair
                 break;
-            case KeyEvent.KEYCODE_DPAD_LEFT://turn lef
-                fragment.sendMessage("0a");
+            case KeyEvent.KEYCODE_DPAD_LEFT:
+                fragment.sendMessage("0a");//turn left
                 break;
-            case KeyEvent.KEYCODE_DPAD_RIGHT://turn right
-                fragment.sendMessage("0d");
+            case KeyEvent.KEYCODE_DPAD_RIGHT:
+                fragment.sendMessage("0d");//turn right
                 break;
             case KeyEvent.KEYCODE_DPAD_UP:
-                fragment.sendMessage("0w");
+                fragment.sendMessage("0w");//engine up
                 break;
             case KeyEvent.KEYCODE_DPAD_DOWN:
-                fragment.sendMessage("0s");
+                fragment.sendMessage("0s");//engine down
                 break;
             case KeyEvent.KEYCODE_BUTTON_B:
-                fragment.sendMessage("0l");
+                fragment.sendMessage("0l");//move right
                 break;
             case KeyEvent.KEYCODE_BUTTON_X:
-                fragment.sendMessage("0j");
+                fragment.sendMessage("0j");//move left
                 break;
             case KeyEvent.KEYCODE_BUTTON_Y:
-                fragment.sendMessage("0i");
+                fragment.sendMessage("0i");//forward
                 break;
             case KeyEvent.KEYCODE_BUTTON_A:
-                fragment.sendMessage("0k");
+                fragment.sendMessage("0k");//move back
                 break;
             case KeyEvent.KEYCODE_BUTTON_R1:
-                //kill throttle
-                fragment.sendMessage("04");
+                fragment.sendMessage("04");//kill throttle
                 break;
-            case KeyEvent.KEYCODE_BUTTON_R2://kill throttle
-                fragment.sendMessage("04");
+            case KeyEvent.KEYCODE_BUTTON_R2:
+                fragment.sendMessage("04");//kill throttle
                 break;
-            case KeyEvent.KEYCODE_BUTTON_L1://kill throttle
-                fragment.sendMessage("04");
-            case KeyEvent.KEYCODE_BUTTON_L2://kill throttle
-                fragment.sendMessage("04");
+            case KeyEvent.KEYCODE_BUTTON_L1:
+                fragment.sendMessage("04");//kill throttle
+                break;
+            case KeyEvent.KEYCODE_BUTTON_L2:
+                fragment.sendMessage("04");//kill throttle
                 break;
             default:
                 break;
