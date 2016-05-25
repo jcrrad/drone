@@ -33,7 +33,7 @@ import com.example.android.common.logger.MessageOnlyLogFilter;
 /**
  * A simple launcher activity containing a summary sample description, sample log and a custom
  * {@link android.support.v4.app.Fragment} which can display a view.
- * <p/>
+ * <p>
  * For devices with displays with a width of 720dp or greater, the sample log is always visible,
  * on other devices it's visibility is controlled by an item on the Action Bar.
  */
@@ -76,7 +76,8 @@ public class MainActivity extends SampleActivityBase {
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
         Log.v("KeyJeff", event.getKeyCode() + "");
-        event.getAction()
+
+        if (event.getRepeatCount() > 0) return false;
         switch (event.getKeyCode()) {
             case KeyEvent.KEYCODE_BUTTON_START:
                 fragment.sendMessage("02");//pair
